@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
@@ -22,6 +23,7 @@
                 </div>
             </div>
         </section>
+
         <!-- 2 Fragmento para agregar categoria, es la ventana modal -->
         <section th:fragment="agregarCategoria">
             <div id="agregarCategoria" 
@@ -60,6 +62,7 @@
                 </div>
             </div>
         </section>
+
         <!-- 3 Sección principal para mostrar la informaccion de la entidad categoria -->
         <section th:fragment="listadoCategorias" id="categorias">
             <div class="container">
@@ -80,7 +83,7 @@
                                     <tbody>
                                         <tr th:each="categoria, contador : ${categorias}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${categoria.descripcion}]]</td>
+                                            <td>[[${categoria.descripcion}]]</td> 
                                             <td th:text="${categoria.activo} ? 'Activa' : 'Inactiva'" />
                                             <td><a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
                                                    class="btn btn-danger">
@@ -107,6 +110,7 @@
                 </div>
             </div>
         </section>
+
         <!-- 4 Fragmento que se utiliza en la página modifca.html -->
         <section th:fragment="editarCategoria">
             <div class="row">
@@ -158,6 +162,7 @@
                 </div>
             </div>
         </section>
+
         <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
         <section th:fragment="botonesEditar">
             <div class="container py-4 mb-4 bg-light">

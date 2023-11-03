@@ -1,3 +1,4 @@
+
 /* La siguiente función se utiliza para visualizar la imagen seleccionada en la
  * página html donde se desea "cargar" utilizando un llamado "ajax"*/
 function readURL(input) {
@@ -11,6 +12,7 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
 /* La siguiente función se utiliza para activar la cantidad de elementos seleccionados
  * En el carrito de compras utilizando un llamado "ajax" */
 function addCard(formulario) {
@@ -19,4 +21,3 @@ function addCard(formulario) {
     url = url + '/' + valor;
     $("#resultsBlock").load(url);
 }
-

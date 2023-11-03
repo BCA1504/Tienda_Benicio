@@ -1,5 +1,5 @@
+package Tienda_BENICIO.demo;
 
-package Tienda_Benicio.demo;
 import java.util.Locale;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-@Configuration
-public class ProjectConfig implements WebMvcConfigurer {
+
+public class ProjectConfig implements WebMvcConfigurer{
     /* Los siguientes métodos son para incorporar el tema de internacionalización en el proyecto */
     
     /* localeResolver se utiliza para crear una sesión de cambio de idioma*/

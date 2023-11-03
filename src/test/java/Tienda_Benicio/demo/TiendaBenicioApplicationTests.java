@@ -1,4 +1,4 @@
-package Tienda_Benicio.demo;
+package Tienda_BENICIO.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
