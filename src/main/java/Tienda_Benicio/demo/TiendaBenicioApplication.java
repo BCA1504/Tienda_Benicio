@@ -1,4 +1,4 @@
-package Tienda_Benicio.demo;
+package Tienda_BENICIO.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
