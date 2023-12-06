@@ -1,11 +1,14 @@
 package com.tienda.domain;
+
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name="categoria")
+
 public class Categoria implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -20,6 +23,10 @@ public class Categoria implements Serializable {
     
     public Categoria() {
     }
+    
+    @OneToMany
+    @JoinColumn(name = "id_categoria", updatable = false)
+    List<Producto> productos;
     
     public Categoria(String categoria, boolean activo) {
         this.descripcion = categoria;

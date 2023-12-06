@@ -99,6 +99,24 @@
             <version>1.2</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.guicedee.services</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>1.2.2.1-jre17</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>cn.fsdev</groupId>
+            <artifactId>jfinal-mail-plugin</artifactId>
+            <version>3.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.spring-context-support</artifactId>
+            <version>6.0.12_1</version>
+            <type>bundle</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

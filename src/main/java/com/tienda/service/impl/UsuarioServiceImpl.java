@@ -1,43 +1,65 @@
 package com.tienda.service.impl;
 
-import com.tienda.service.UsuarioDetailsService;
+import com.tienda.dao.RolDao;
 import com.tienda.dao.UsuarioDao;
-import com.tienda.domain.Usuario;
 import com.tienda.domain.Rol;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import com.tienda.domain.Usuario;
+import com.tienda.service.UsuarioService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("userDetailsService")
-
-public class UsuarioDetailsServiceImpl implements UsuarioDetailsService, UserDetailsService {
+@Service
+public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioDao usuarioDao;
-    @Autowired
-    private HttpSession session;
-
-    @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //Busca el usuario por el username en la tabla
-        Usuario usuario = usuarioDao.findByUsername(username);
-        //Si no existe el usuario lanza una excepción
-        if (usuario == null) {
-            throw new UsernameNotFoundException(username);
+    @Autowired 
+    private RolDao rolDao;
+    
+    @Transactional (readOnly = true)
+    public List<Usuario> getUsuarios(){
+        return usuarioDao.findAll();
+    }
+    
+    @Transactional (readOnly = true)
+    public Usuario getUsuario(Usuario usuario){
+        return usuarioDao.findById(usuario.getIdUsuario()).orElse(null);
+    }
+    
+    @Transactional (readOnly = true)
+    public Usuario getUsuarioPorUsername(String username){
+        return usuarioDao.findByUsername(username);
+    }
+    
+    @Transactional (readOnly = true)
+    public Usuario getUsuarioPorUsernameYPassword (String username, String password){
+        return usuarioDao.findByUsernameAndPassword(username, password);
+    }
+    
+    @Transactional (readOnly = true)
+    public Usuario getUsuarioPorUsernameOCorreo (String username, String correo){
+        return usuarioDao.findByUsernameOrCoreo(username, correo);
+    }
+    
+    @Transactional (readOnly = true)
+    public boolean existeUsuarioPorUsernameOCorreo (String username, String correo){
+        return usuarioDao.existsByUsernameOrCorreo(username, correo);
+    }
+    
+    @Transactional (readOnly = true)
+    public void save (Usuario usuario, boolean crearRolUser){
+        usuario = usuarioDao.save(usuario);
+        if (crearRolUser){
+            Rol rol = new Rol();
+            rol.setNombre("ROLE_USER");
+            rol.setIdUsuario(usuario.getIdUsuario());
+            rolDao.save(rol);
         }
-        session.removeAttribute("usuarioImagen");
-        session.setAttribute("usuarioImagen", usuario.getRutaImagen());
-        //Si está acá es porque existe el usuario... sacamos los roles que tiene
-        var roles = new ArrayList<GrantedAuthority>();
-        for (Rol rol : usuario.getRoles()) {   //Se sacan los roles
-            roles.add(new SimpleGrantedAuthority(rol.getNombre()));
-        }
-        //Se devuelve User (clase de userDetails)
-        return new User(usuario.getUsername(), usuario.getPassword(), roles);
+    }
+    
+    @Transactional (readOnly = true)
+    public void delete (Usuario usuario){
+        usuarioDao.delete(usuario);
     }
 }

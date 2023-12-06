@@ -1,8 +1,25 @@
 
 package com.tienda.service;
 
-import org.springframework.security.core.userdetails.*;
+import com.tienda.domain.Usuario;
+import java.util.List;
 
 public interface UsuarioService {
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    
+    public List<Usuario> getUsuario();
+    
+    public Usuario getUsuario (Usuario usuario);
+    
+    public Usuario getUsuarioPorUsername (String username);
+    
+    public Usuario getUsuarioPorUsernameYPassword (String username, String password);
+    
+    public Usuario getUsuarioPorUsernameOCorreo (String username, String correo);
+    
+    public boolean existeUsuarioPorUsernameOCorreo (String username, String correo);
+    
+    public void save (Usuario usuario, boolean crearRolUser);
+    
+    public void delete (Usuario usuario);  
+
 }
